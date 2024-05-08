@@ -1,0 +1,20 @@
+version: "3.8"
+
+# Services
+services:
+  # Nginx Service
+  nginx:
+    image: nginx:1.18
+    ports:
+      - 8383:80
+    volumes:
+      - ./.docker/nginx/conf.d/php.conf:/etc/nginx/conf.d/default.conf
+      - ./.docker/nginx/certs:/etc/nginx/certs
+
+  # Vue.js 3
+  vue:
+    build: 
+      context: .
+      dockerfile: ./.docker/vue/Dockerfile
+    ports:
+      - "83:80"
